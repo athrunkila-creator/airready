@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirReady — Broadcast-perfect loudness for your podcast & videos</title>
+<meta name="description" content="AirReady is a Mac app that normalizes podcasts and videos to platform-perfect loudness — YouTube, Spotify, Apple Podcasts, broadcast standards. One click. Batch mode. 100% offline. $19.99 once, not $13/month.">
+<meta property="og:title" content="AirReady — Your audio, at the right loudness. Everywhere.">
+<meta property="og:description" content="One-click loudness normalization for podcasters & video creators. Built by a broadcast TV engineer. $19.99 once.">
+<style>
+  :root{
+    --ink:#1a1a1f; --ink2:#55555f; --bg:#fafaf7; --card:#ffffff;
+    --accent:#e03131; --accent-soft:#fff0f0; --amber:#f59f0a;
+    --line:#e8e8e2; --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+  a{color:inherit}
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(250,250,247,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-in{max-width:960px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:28px}
+  .logo{font-weight:800;font-size:18px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+  .nav-links{display:flex;gap:22px;font-size:14px;color:var(--ink2)}
+  .nav-links a{text-decoration:none}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{margin-left:auto}
+  /* buttons */
+  .btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:none;cursor:pointer;transition:.15s}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{filter:brightness(1.08)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--ink)}
+  .btn-sm{padding:8px 16px;font-size:13px}
+  /* hero */
+  header{padding:72px 0 56px;text-align:center}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:600;padding:6px 14px;border-radius:99px;margin-bottom:22px}
+  h1{font-size:clamp(34px,6vw,54px);font-weight:800;letter-spacing:-.03em;line-height:1.12;max-width:720px;margin:0 auto 18px}
+  .sub{font-size:18px;color:var(--ink2);max-width:620px;margin:0 auto 14px}
+  .price-hook{font-size:20px;font-weight:700;margin-bottom:30px}
+  .price-hook s{color:var(--ink2);font-weight:400}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+  .micro{font-size:13px;color:var(--ink2)}
+  /* waveform deco */
+  .wave{display:flex;gap:4px;align-items:flex-end;justify-content:center;height:36px;margin:44px auto 0;opacity:.85}
+  .wave i{width:4px;border-radius:2px;background:var(--accent);animation:w 1.4s ease-in-out infinite}
+  .wave i:nth-child(odd){background:var(--amber)}
+  @keyframes w{0%,100%{height:8px}50%{height:32px}}
+  /* app mock */
+  .mock{max-width:560px;margin:48px auto 0;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 64px rgba(26,26,31,.10);overflow:hidden;text-align:left}
+  .mock-bar{display:flex;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line)}
+  .mock-bar i{width:11px;height:11px;border-radius:50%;background:var(--line)}
+  .mock-bar i:first-child{background:#ff5f57}.mock-bar i:nth-child(2){background:#febc2e}.mock-bar i:nth-child(3){background:#28c840}
+  .mock-body{padding:24px}
+  .drop{border:2px dashed var(--line);border-radius:12px;padding:28px;text-align:center;color:var(--ink2);font-size:14px}
+  .drop b{color:var(--ink)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .chip{font-size:12px;font-weight:600;padding:6px 12px;border-radius:99px;background:#f4f4ef;color:var(--ink2)}
+  .chip.on{background:var(--accent);color:#fff}
+  .mock-note{text-align:center;font-size:12px;color:var(--ink2);margin-top:12px}
+  /* sections */
+  section{padding:64px 0}
+  .kicker{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:10px}
+  h2{font-size:clamp(26px,4vw,34px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+  .lead{color:var(--ink2);max-width:640px;margin-bottom:36px}
+  /* pain cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .card h3{font-size:16px;margin-bottom:8px}
+  .card p{font-size:14px;color:var(--ink2)}
+  .card .em{font-size:26px;margin-bottom:12px;display:block}
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;counter-reset:s}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;counter-increment:s}
+  .step::before{content:counter(s);display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:15px;margin-bottom:14px}
+  .step h3{font-size:16px;margin-bottom:6px}
+  .step p{font-size:14px;color:var(--ink2)}
+  /* table */
+  .tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:14px}
+  .tbl th{background:#f4f4ef;text-align:left;padding:12px 16px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2)}
+  .tbl td{padding:12px 16px;border-top:1px solid var(--line)}
+  .tbl tr:hover td{background:#fcfcfa}
+  .tbl .num{font-variant-numeric:tabular-nums;font-weight:600}
+  .tbl-scroll{overflow-x:auto}
+  /* pricing */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:640px}
+  .vs .card.bad{opacity:.75}
+  .vs .card.good{border:2px solid var(--accent)}
+  .vs h3{margin-bottom:14px}
+  .vs ul{list-style:none;font-size:14px;color:var(--ink2)}
+  .vs li{padding:5px 0}
+  .vs .big{font-size:30px;font-weight:800;color:var(--ink);margin:8px 0}
+  .founding{margin-top:28px;background:var(--accent-soft);border-radius:var(--radius);padding:20px 24px;font-size:15px;max-width:640px}
+  /* privacy band */
+  .band{background:var(--ink);color:#fff;border-radius:20px;padding:48px 40px;text-align:center}
+  .band h2{color:#fff}
+  .band p{color:#b9b9c2;max-width:560px;margin:0 auto}
+  /* faq */
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:10px}
+  summary{font-weight:600;font-size:15px;cursor:pointer}
+  details p{margin-top:10px;font-size:14px;color:var(--ink2)}
+  /* form */
+  .signup{max-width:480px;margin:0 auto;text-align:center}
+  .signup form{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;justify-content:center}
+  .signup input{flex:1;min-width:220px;padding:13px 16px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;background:var(--card)}
+  .signup input:focus{outline:none;border-color:var(--accent)}
+  footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(--ink2);text-align:center}
+  @media(max-width:640px){.nav-links{display:none}.vs{grid-template-columns:1fr}header{padding:48px 0 40px}}
+</style>
+</head>
+<body>
+
+<nav><div class="nav-in">
+  <div class="logo"><span class="dot"></span>AirReady</div>
+  <div class="nav-links">
+    <a href="#presets">Presets</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+  </div>
+  <div class="nav-cta"><a class="btn btn-primary btn-sm" href="#signup">Get 40% off</a></div>
+</div></nav>
+
+<header class="wrap">
+  <div class="badge"><span class="dot" style="box-shadow:none"></span>Built by a broadcast TV engineer — loudness standards are literally my day job</div>
+  <h1>Your audio, at the right loudness. Everywhere.</h1>
+  <p class="sub">AirReady is a tiny Mac app that normalizes podcasts and videos to platform-perfect loudness — YouTube, Spotify, Apple Podcasts, even broadcast standards. One click. Batch mode. 100% offline.</p>
+  <p class="price-hook">$19.99 once. <s>Not $13/month.</s></p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="#signup">Join the founding list — 40% off at launch</a>
+    <a class="btn btn-ghost" href="#pricing">Pre-order $14.99 ↗</a>
+  </div>
+  <p class="micro">No account · No uploads · No subscription · First beta ships in ~8 weeks</p>
+
+  <div class="mock" aria-hidden="true">
+    <div class="mock-bar"><i></i><i></i><i></i></div>
+    <div class="mock-body">
+      <div class="drop"><b>Drop episode-47-final-FINAL.wav</b><br>…or a whole season folder. Audio & video welcome.</div>
+      <div class="chips">
+        <span class="chip on">▶ YouTube −14</span><span class="chip">Spotify −14</span><span class="chip">Apple Podcasts −16</span><span class="chip">TikTok −14</span><span class="chip">EBU R128 −23</span><span class="chip">ATSC A/85 −24</span>
+      </div>
+    </div>
+  </div>
+  <p class="mock-note">UI concept — the real thing ships to founding members first.</p>
+
+  <div class="wave" aria-hidden="true"><i style="animation-delay:0s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:0s"></i></div>
+</header>
+
+<section class="wrap" id="pain">
+  <div class="kicker">Sound familiar?</div>
+  <h2>Loudness shouldn't need a degree</h2>
+  <div class="cards">
+    <div class="card"><span class="em">📉</span><h3>Quiet on YouTube, clipped on Spotify</h3><p>You upload, the platform normalizes on its own terms, and your episode suddenly sounds worse than everyone else's. You only find out from listeners.</p></div>
+    <div class="card"><span class="em">💸</span><h3>$156/year for twice-a-week loudness</h3><p>Cloud tools work — but a $13/month subscription for something you need two episodes a week never stops billing. Forever.</p></div>
+    <div class="card"><span class="em">⌨️</span><h3>ffmpeg loudnorm is free, if you speak man-page</h3><p>Two-pass measurement, integrated vs LRA vs true-peak, offset corrections… it does exactly what you need and nothing you can explain to a co-host.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="how">
+  <div class="kicker">How it works</div>
+  <h2>Three steps. That's the whole app.</h2>
+  <div class="steps">
+    <div class="step"><h3>Drop your files</h3><p>Audio or video, any common format, whole folders welcome. Nothing uploads — processing happens on your Mac.</p></div>
+    <div class="step"><h3>Pick a destination</h3><p>YouTube, Spotify, Apple Podcasts, TikTok, EBU R128, ATSC A/85… or dial in a custom target.</p></div>
+    <div class="step"><h3>Export</h3><p>Correct integrated loudness, correct true-peak ceiling, files ready to upload. Batch a whole season overnight.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="presets">
+  <div class="kicker">Presets</div>
+  <h2>Every platform's loudness spec, one click away</h2>
+  <p class="lead">The cheat-sheet broadcast engineers live by, minus the engineering degree. Values verified against platform docs & standards (last checked Sep 2026).</p>
+  <div class="tbl-scroll"><table class="tbl">
+    <tr><th>Destination</th><th>Target loudness</th><th>True peak</th></tr>
+    <tr><td>YouTube</td><td class="num">−14 LUFS</td><td class="num">−1 dBTP</td></tr>
+    <tr><td>Spotify</td><td class="num">−14 LUFS</td><td class="num">−1 dBTP</td></tr>
+    <tr><td>Apple Podcasts</td><td class="num">−16 LUFS</td><td class="num">−1 dBTP</td></tr>
+    <tr><td>TikTok / Reels / Shorts</td><td class="num">−14 LUFS</td><td class="num">−1 dBTP</td></tr>
+    <tr><td>EBU R128 (EU broadcast)</td><td class="num">−23 LUFS</td><td class="num">−1 dBTP</td></tr>
+    <tr><td>ATSC A/85 (US broadcast)</td><td class="num">−24 LKFS</td><td class="num">−2 dBTP</td></tr>
+    <tr><td>China GY/T 282 <em>(bonus)</em></td><td class="num">−24 LKFS ±2 LU</td><td class="num">−2 dBTP</td></tr>
+    <tr><td>Custom</td><td class="num">anything</td><td class="num">anything</td></tr>
+  </table></div>
+</section>
+
+<section class="wrap" id="pricing">
+  <div class="kicker">Pricing</div>
+  <h2>Buy it once. Own it forever.</h2>
+  <div class="vs">
+    <div class="card bad">
+      <h3>Cloud subscription tools</h3>
+      <div class="big">$156<small style="font-size:14px;font-weight:400;color:var(--ink2)">/year</small></div>
+      <ul>
+        <li>— $468 over three years</li>
+        <li>— your audio uploaded to someone's server</li>
+        <li>— metered by the hour</li>
+        <li>— needs internet, always</li>
+      </ul>
+    </div>
+    <div class="card good">
+      <h3>AirReady</h3>
+      <div class="big">$19.99<small style="font-size:14px;font-weight:400;color:var(--ink2)"> once</small></div>
+      <ul>
+        <li>✓ same price in year 3</li>
+        <li>✓ files never leave your Mac</li>
+        <li>✓ unlimited batch processing</li>
+        <li>✓ works on a plane</li>
+      </ul>
+    </div>
+  </div>
+  <div class="founding"><b>Founding members: $14.99</b> — locked for the first 100 pre-orders. Free updates through 1.x. Fully refundable any time until we ship. <a href="#signup" style="color:var(--accent);font-weight:600">Pre-order opens with the beta →</a></div>
+</section>
+
+<section class="wrap">
+  <div class="band">
+    <h2 style="margin-bottom:12px">Your audio never leaves your Mac.</h2>
+    <p>No cloud processing. No account required. No analytics SDKs. Which also means: no upload wait for a 3-hour video, and no per-hour metering. Ever.</p>
+  </div>
+</section>
+
+<section class="wrap" id="faq">
+  <div class="kicker">FAQ</div>
+  <h2>Straight answers</h2>
+  <details open><summary>When does it ship?</summary><p>First beta goes to the founding list in about 8 weeks. Pre-orders are fully refundable until then — if it never ships, you lose nothing.</p></details>
+  <details><summary>Is it <em>just</em> loudness?</summary><p>Yes, deliberately. No noise reduction, no music bed, no AI "enhancement". One job, done right, at broadcast accuracy. If you need full mastering, Auphonic and iZotope RX are excellent — and stay excellent at 10× the price.</p></details>
+  <details><summary>Does it work with video files?</summary><p>Yes. MP4, MOV and friends — the audio track is normalized and remuxed back without re-encoding your video. Zero quality loss on the picture.</p></details>
+  <details><summary>Apple Silicon or Intel?</summary><p>Apple Silicon first; Intel Macs on macOS 13+ supported. Windows: not at launch — we'd rather perfect one platform.</p></details>
+  <details><summary>Refunds?</summary><p>30 days, no questions asked, after launch. Pre-orders: refundable any time before shipping, one click.</p></details>
+</section>
+
+<section class="wrap" id="signup">
+  <div class="signup">
+    <div class="kicker">Founding list</div>
+    <h2>Stop re-uploading. Stop renting your loudness.</h2>
+    <p class="lead" style="margin:0 auto">Join the founding list: 40% off at launch, beta access, and zero spam — one email when it ships.</p>
+    <!-- FORM_ENDPOINT: 待主人提供 Formspree ID 或收件邮箱后激活 -->
+    <form action="https://formspree.io/f/XXXXXXX" method="POST">
+      <input type="email" name="email" placeholder="you@yourshow.fm" required>
+      <button class="btn btn-primary" type="submit">Get 40% off →</button>
+    </form>
+    <p class="micro" style="margin-top:14px">Prefer to lock the price now? Pre-orders ($14.99, refundable until ship) open with the beta.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>AirReady</b> — concept stage, built in public. Product in development; nothing is charged until the beta ships.</p>
+    <p style="margin-top:6px">© 2026 AirReady · Made for podcasters & creators by a broadcast engineer · hello@<span>getairready.com</span></p>
+  </div>
+</footer>
+
+</body>
+</html>
